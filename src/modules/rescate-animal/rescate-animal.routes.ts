@@ -1,0 +1,50 @@
+import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
+import { rescate_animal_pages } from "./rescate-animal.pages.ts";
+import { rescate_animal_tables } from "./rescate-animal.tables.ts";
+
+export const rescate_animal_module = define_module({
+  resource: "rescate-animal",
+  labels: {
+    singular: "Rescate animal",
+    plural: "Rescate animal",
+    read: "Ver Rescate animal",
+    write: "Editar Rescate animal",
+  },
+  routes: define_crud({
+    resource: "rescate-animal",
+    table: "rescate_animal",
+    soft_delete: true,
+    soft_delete_field: "is_active",
+    history: true,
+    default_sort: "name:asc",
+    id_prefix: "rescate-",
+    fields: {
+      name: { type: "string", required: true, search: true },
+      description: { type: "string", search: true },
+      is_active: { type: "boolean" },
+      state: { type: "string" },
+      ref: { type: "string", search: true },
+      search_field: { type: "string", search: true },
+      created_by: { type: "string" },
+      custom_data: { type: "json" },
+      payload: { type: "json" },
+      nombre_animal: { type: "string", search: true },
+      especie: { type: "string", search: true },
+      estado: { type: "string", search: true },
+      fecha: { type: "string", search: true },
+      lugar_encontrado: { type: "string", search: true },
+      chip_numero: { type: "string", search: true },
+      raza: { type: "string", search: true },
+      edad_aproximada: { type: "string", search: true },
+      color: { type: "string", search: true },
+      peso_aproximado: { type: "number" },
+      fotografia: { type: "string", search: true },
+      estado_animal: { type: "string", search: true },
+      material_utilizado: { type: "string", search: true },
+    },
+    options_map: { value: "id", label: "name" },
+  }),
+  tables: rescate_animal_tables,
+  pages: rescate_animal_pages,
+  menu: [],
+});

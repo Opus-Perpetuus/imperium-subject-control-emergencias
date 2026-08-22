@@ -1,0 +1,42 @@
+import type { KirletTableDecl } from "@opus-perpetuus/imperium-core-kit";
+
+export const voluntariado_tables: KirletTableDecl[] = [
+  {
+    name: "voluntariado",
+    columns: [
+      { name: "id", type: "text", primaryKey: true },
+      { name: "name", type: "text", notNull: true },
+      { name: "description", type: "text" },
+      { name: "is_active", type: "boolean", notNull: true, default: true },
+      { name: "state", type: "text" },
+      { name: "ref", type: "text", unique: true },
+      { name: "search_field", type: "text" },
+      { name: "created_by", type: "text" },
+      { name: "custom_data", type: "json" },
+      { name: "payload", type: "json" },
+      { name: "created_at", type: "text", notNull: true },
+      { name: "updated_at", type: "text", notNull: true },
+      { name: "numero_socio", type: "text" },
+      { name: "indicativo", type: "text" },
+      { name: "estado", type: "text" },
+      { name: "documento_identidad", type: "text" },
+      { name: "telefono", type: "text" },
+      { name: "correo", type: "text" },
+      { name: "localidad", type: "text" },
+      { name: "foto", type: "text" },
+      { name: "fecha_ingreso", type: "text" },
+      { name: "fecha_nacimiento", type: "text" },
+      { name: "direccion_postal", type: "text" },
+      { name: "codigo_postal", type: "text" },
+      { name: "formacion_interes", type: "json" },
+      { name: "otra_formacion", type: "text" },
+      { name: "carnet_conducir", type: "text" },
+      { name: "observaciones", type: "text" },
+      { name: "documentos_adjuntos", type: "json" },
+    ],
+    indexes: [
+      { name: "idx_voluntariado_name", columns: ["name"] },
+      { name: "idx_voluntariado_active", columns: ["is_active"] },
+    ],
+  },
+];

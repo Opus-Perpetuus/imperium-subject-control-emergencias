@@ -1,0 +1,210 @@
+{
+  "id": "SUBJECT-control-emergencias",
+  "technicalId": "subject-control-emergencias",
+  "name": "Control de emergencias",
+  "version": "0.1.0",
+  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.0",
+  "compat": {
+    "nox": ">=0.5.0",
+    "kit": "^0.5.0"
+  },
+  "api": {
+    "basePath": "/",
+    "port": 3000,
+    "healthPath": "/health"
+  },
+  "permissions": [
+    {
+      "id": "subject.control-emergencias.asociaciones.read",
+      "label": "Ver Gestión de asociaciones"
+    },
+    {
+      "id": "subject.control-emergencias.asociaciones.write",
+      "label": "Editar Gestión de asociaciones"
+    },
+    {
+      "id": "subject.control-emergencias.rescate-animal.read",
+      "label": "Ver Rescate animal"
+    },
+    {
+      "id": "subject.control-emergencias.rescate-animal.write",
+      "label": "Editar Rescate animal"
+    },
+    {
+      "id": "subject.control-emergencias.registro-emergencias.read",
+      "label": "Ver Registro de emergencias"
+    },
+    {
+      "id": "subject.control-emergencias.registro-emergencias.write",
+      "label": "Editar Registro de emergencias"
+    },
+    {
+      "id": "subject.control-emergencias.servicios-realizados.read",
+      "label": "Ver Servicios realizados"
+    },
+    {
+      "id": "subject.control-emergencias.servicios-realizados.write",
+      "label": "Editar Servicios realizados"
+    },
+    {
+      "id": "subject.control-emergencias.directorio-contactos.read",
+      "label": "Ver Directorio de contactos"
+    },
+    {
+      "id": "subject.control-emergencias.directorio-contactos.write",
+      "label": "Editar Directorio de contactos"
+    },
+    {
+      "id": "subject.control-emergencias.inventario-sanitario.read",
+      "label": "Ver Inventario sanitario"
+    },
+    {
+      "id": "subject.control-emergencias.inventario-sanitario.write",
+      "label": "Editar Inventario sanitario"
+    },
+    {
+      "id": "subject.control-emergencias.voluntariado.read",
+      "label": "Ver Gestión de voluntariado"
+    },
+    {
+      "id": "subject.control-emergencias.voluntariado.write",
+      "label": "Editar Gestión de voluntariado"
+    },
+    {
+      "id": "subject.control-emergencias.despensa-solidaria.read",
+      "label": "Ver Despensa solidaria"
+    },
+    {
+      "id": "subject.control-emergencias.despensa-solidaria.write",
+      "label": "Editar Despensa solidaria"
+    }
+  ],
+  "pages": [
+    {
+      "id": "control-emergencias.asociaciones",
+      "path": "asociaciones",
+      "permission": "subject.control-emergencias.asociaciones.read"
+    },
+    {
+      "id": "control-emergencias.rescate-animal",
+      "path": "rescate-animal",
+      "permission": "subject.control-emergencias.rescate-animal.read"
+    },
+    {
+      "id": "control-emergencias.registro-emergencias",
+      "path": "registro-emergencias",
+      "permission": "subject.control-emergencias.registro-emergencias.read"
+    },
+    {
+      "id": "control-emergencias.servicios-realizados",
+      "path": "servicios-realizados",
+      "permission": "subject.control-emergencias.servicios-realizados.read"
+    },
+    {
+      "id": "control-emergencias.directorio-contactos",
+      "path": "directorio-contactos",
+      "permission": "subject.control-emergencias.directorio-contactos.read"
+    },
+    {
+      "id": "control-emergencias.inventario-sanitario",
+      "path": "inventario-sanitario",
+      "permission": "subject.control-emergencias.inventario-sanitario.read"
+    },
+    {
+      "id": "control-emergencias.voluntariado",
+      "path": "voluntariado",
+      "permission": "subject.control-emergencias.voluntariado.read"
+    },
+    {
+      "id": "control-emergencias.despensa-solidaria",
+      "path": "despensa-solidaria",
+      "permission": "subject.control-emergencias.despensa-solidaria.read"
+    }
+  ],
+  "menu": [
+    {
+      "id": "control-emergencias.root",
+      "label": "Control de emergencias",
+      "order": 0,
+      "children": [
+        {
+          "id": "control-emergencias.directorio-contactos",
+          "label": "Directorio de contactos",
+          "order": 0,
+          "pageId": "control-emergencias.directorio-contactos",
+          "path": "directorio-contactos",
+          "permission": "subject.control-emergencias.directorio-contactos.read"
+        },
+        {
+          "id": "control-emergencias.voluntariado",
+          "label": "Gestión de voluntariado",
+          "order": 1,
+          "pageId": "control-emergencias.voluntariado",
+          "path": "voluntariado",
+          "permission": "subject.control-emergencias.voluntariado.read"
+        },
+        {
+          "id": "control-emergencias.rescate-animal",
+          "label": "Rescate animal",
+          "order": 2,
+          "pageId": "control-emergencias.rescate-animal",
+          "path": "rescate-animal",
+          "permission": "subject.control-emergencias.rescate-animal.read"
+        },
+        {
+          "id": "control-emergencias.servicios-realizados",
+          "label": "Servicios realizados",
+          "order": 3,
+          "pageId": "control-emergencias.servicios-realizados",
+          "path": "servicios-realizados",
+          "permission": "subject.control-emergencias.servicios-realizados.read"
+        },
+        {
+          "id": "control-emergencias.inventario-sanitario",
+          "label": "Inventario sanitario",
+          "order": 4,
+          "pageId": "control-emergencias.inventario-sanitario",
+          "path": "inventario-sanitario",
+          "permission": "subject.control-emergencias.inventario-sanitario.read"
+        },
+        {
+          "id": "control-emergencias.despensa-solidaria",
+          "label": "Despensa solidaria",
+          "order": 5,
+          "pageId": "control-emergencias.despensa-solidaria",
+          "path": "despensa-solidaria",
+          "permission": "subject.control-emergencias.despensa-solidaria.read"
+        },
+        {
+          "id": "control-emergencias.asociaciones",
+          "label": "Gestión de asociaciones",
+          "order": 6,
+          "pageId": "control-emergencias.asociaciones",
+          "path": "asociaciones",
+          "permission": "subject.control-emergencias.asociaciones.read"
+        },
+        {
+          "id": "control-emergencias.registro-emergencias",
+          "label": "Registro de emergencias",
+          "order": 7,
+          "pageId": "control-emergencias.registro-emergencias",
+          "path": "registro-emergencias",
+          "permission": "subject.control-emergencias.registro-emergencias.read"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "domain": "shared-nox-postgres"
+  },
+  "resources": {
+    "asociaciones": "asociaciones",
+    "rescate-animal": "rescate_animal",
+    "registro-emergencias": "registro_emergencias",
+    "servicios-realizados": "servicios_realizados",
+    "directorio-contactos": "directorio_contactos",
+    "inventario-sanitario": "inventario_sanitario",
+    "voluntariado": "voluntariado",
+    "despensa-solidaria": "despensa_solidaria"
+  }
+}
