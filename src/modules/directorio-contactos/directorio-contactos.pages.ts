@@ -10,8 +10,32 @@ export const directorio_contactos_pages: KirletPageDecl[] = [
     id: "control-emergencias.directorio-contactos",
     path: "directorio-contactos",
     permission: "subject.control-emergencias.directorio-contactos.read",
-    build: () =>
-      build_feature_shell_page({
+    build: async ({ data }) => {
+      const catalog = (await data.findMany("categoria_directorio_contactos", {
+        where: { is_active: true },
+        orderBy: { name: "asc" },
+      })) as Array<{ ref?: string; name?: string }>;
+      const categoria_options = (
+        catalog.length
+          ? catalog
+          : [
+              { ref: "emergencias", name: "Emergencias" },
+              { ref: "sanidad", name: "Sanidad" },
+              { ref: "cultura", name: "Cultura" },
+              { ref: "turismo", name: "Turismo" },
+              { ref: "poblados", name: "Poblados" },
+              { ref: "hacienda", name: "Hacienda y Economía" },
+              { ref: "transporte", name: "Transporte" },
+              { ref: "servicios_municipales", name: "Servicios municipales" },
+              { ref: "gobierno", name: "Gobierno" },
+              { ref: "comunidad_autonoma", name: "Comunidad autónoma" },
+            ]
+      ).map((row) => ({
+        value: String(row.ref || row.name || ""),
+        label: String(row.name || row.ref || ""),
+      }));
+
+      return build_feature_shell_page({
         id: "control-emergencias.directorio-contactos",
         owner: "subject-control-emergencias",
         title: "Directorio de contactos",
@@ -58,29 +82,18 @@ export const directorio_contactos_pages: KirletPageDecl[] = [
                 name: "categoria",
                 component: "input-menu",
                 label: "Categoría",
-                options: [
-                  { value: "emergencias", label: "Emergencias" },
-                  { value: "sanidad", label: "Sanidad" },
-                  { value: "cultura", label: "Cultura" },
-                  { value: "turismo", label: "Turismo" },
-                  { value: "poblados", label: "Poblados" },
-                  { value: "hacienda", label: "Hacienda y Economía" },
-                  { value: "transporte", label: "Transporte" },
-                  { value: "servicios_municipales", label: "Servicios municipales" },
-                  { value: "gobierno", label: "Gobierno" },
-                  { value: "comunidad_autonoma", label: "Comunidad autónoma" },
-                ],
+                options: categoria_options,
               },
               { name: "telefono", component: "input-text", label: "telefono" },
               { name: "telefono_secundario", component: "input-text", label: "telefono secundario" },
               { name: "direccion", component: "input-text", label: "direccion" },
               { name: "web", component: "input-text", label: "web" },
               { name: "email", component: "input-text", label: "email" },
-              { name: "fax", component: "input-text", label: "fax" },
               { name: "observaciones", component: "input-text", label: "observaciones" },
             ],
           },
         },
-      }),
+      });
+    },
   },
 ];

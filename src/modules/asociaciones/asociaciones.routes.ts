@@ -63,6 +63,15 @@ export const asociaciones_module = define_module({
       icon: "document",
     },
     {
+      id: "control-emergencias.categoria-directorio-contactos",
+      label: "Categorías del directorio",
+      order: 10,
+      pageId: "control-emergencias.categoria-directorio-contactos",
+      path: "categoria-directorio-contactos",
+      permission: "subject.control-emergencias.categoria-directorio-contactos.read",
+      icon: "document",
+    },
+    {
       id: "control-emergencias.voluntariado",
       label: "Gestión de voluntariado",
       order: 1,

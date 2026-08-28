@@ -2,8 +2,8 @@
   "id": "SUBJECT-control-emergencias",
   "technicalId": "subject-control-emergencias",
   "name": "Control de emergencias",
-  "version": "0.1.0",
-  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.0",
+  "version": "0.1.1",
+  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.1",
   "compat": {
     "nox": ">=0.5.0",
     "kit": "^0.5.0"
@@ -53,6 +53,14 @@
     {
       "id": "subject.control-emergencias.directorio-contactos.write",
       "label": "Editar Directorio de contactos"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-directorio-contactos.read",
+      "label": "Ver categorías del directorio"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-directorio-contactos.write",
+      "label": "Editar categorías del directorio"
     },
     {
       "id": "subject.control-emergencias.inventario-sanitario.read",
@@ -108,6 +116,15 @@
           "order": 0,
           "path": "directorio-contactos",
           "permission": "subject.control-emergencias.directorio-contactos.read",
+          "icon": "document"
+        },
+        {
+          "id": "control-emergencias.categoria-directorio-contactos",
+          "label": "Categorías del directorio",
+          "pageId": "control-emergencias.categoria-directorio-contactos",
+          "order": 10,
+          "path": "categoria-directorio-contactos",
+          "permission": "subject.control-emergencias.categoria-directorio-contactos.read",
           "icon": "document"
         },
         {
@@ -221,6 +238,11 @@
       "permission": "subject.control-emergencias.directorio-contactos.read"
     },
     {
+      "id": "control-emergencias.categoria-directorio-contactos",
+      "path": "categoria-directorio-contactos",
+      "permission": "subject.control-emergencias.categoria-directorio-contactos.read"
+    },
+    {
       "id": "control-emergencias.inventario-sanitario",
       "path": "inventario-sanitario",
       "permission": "subject.control-emergencias.inventario-sanitario.read"
@@ -256,6 +278,7 @@
     "registro-emergencias": "registro-emergencias",
     "servicios-realizados": "servicios-realizados",
     "directorio-contactos": "directorio-contactos",
+    "categoria-directorio-contactos": "categoria-directorio-contactos",
     "inventario-sanitario": "inventario-sanitario",
     "inventario-general": "inventario-general",
     "voluntariado": "voluntariado",

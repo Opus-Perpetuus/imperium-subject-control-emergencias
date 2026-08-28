@@ -51,7 +51,7 @@ export const rescate_animal_pages: KirletPageDecl[] = [
           },
           form: {
             fields: [
-              { name: "name", component: "input-text", label: "Nombre", required: true },
+              { name: "name", component: "input-text", label: "Folio INT" },
               { name: "description", component: "input-text", label: "Descripción" },
               { name: "ref", component: "input-text", label: "Referencia (_ref)" },
               { name: "nombre_animal", component: "input-text", label: "nombre animal" },
@@ -59,7 +59,7 @@ export const rescate_animal_pages: KirletPageDecl[] = [
               { name: "estado", component: "input-text", label: "estado" },
               { name: "fecha", component: "input-text", label: "fecha" },
               { name: "lugar_encontrado", component: "input-text", label: "lugar encontrado" },
-              { name: "chip_numero", component: "input-text", label: "chip numero" },
+              { name: "chip_numero", component: "input-text", label: "Nº de chip (escáner o escrito)" },
               { name: "raza", component: "input-text", label: "raza" },
               { name: "edad_aproximada", component: "input-text", label: "edad aproximada" },
               { name: "color", component: "input-text", label: "color" },

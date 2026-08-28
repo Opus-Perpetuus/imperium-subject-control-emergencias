@@ -1,6 +1,10 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { rescate_animal_pages } from "./rescate-animal.pages.ts";
 import { rescate_animal_tables } from "./rescate-animal.tables.ts";
+import {
+  is_blank_intervention_number,
+  next_rescue_folio,
+} from "./rescate-animal-folio.utils.ts";
 
 export const rescate_animal_module = define_module({
   resource: "rescate-animal",
@@ -19,7 +23,7 @@ export const rescate_animal_module = define_module({
     default_sort: "name:asc",
     id_prefix: "rescate-",
     fields: {
-      name: { type: "string", required: true, search: true },
+      name: { type: "string", search: true },
       description: { type: "string", search: true },
       is_active: { type: "boolean" },
       state: { type: "string" },
@@ -43,6 +47,15 @@ export const rescate_animal_module = define_module({
       material_utilizado: { type: "string", search: true },
     },
     options_map: { value: "id", label: "name" },
+    hooks: {
+      before_create: async (ctx, row) => {
+        if (is_blank_intervention_number(row.name)) {
+          const n = await ctx.data.count("rescate_animal");
+          row.name = next_rescue_folio(n);
+        }
+        return row;
+      },
+    },
   }),
   tables: rescate_animal_tables,
   pages: rescate_animal_pages,
