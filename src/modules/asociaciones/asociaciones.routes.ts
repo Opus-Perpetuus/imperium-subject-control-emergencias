@@ -1,6 +1,7 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { asociaciones_pages } from "./asociaciones.pages.ts";
 import { asociaciones_tables } from "./asociaciones.tables.ts";
+import { apply_interaccion_to_row } from "./asociaciones-interaccion.utils.ts";
 
 export const asociaciones_module = define_module({
   resource: "asociaciones",
@@ -34,12 +35,20 @@ export const asociaciones_module = define_module({
       localidad: { type: "string", search: true },
       tipo: { type: "string", search: true },
       fecha: { type: "string", search: true },
+      fecha_interaccion: { type: "string", search: true },
+      tipo_interaccion: { type: "string", search: true },
+      notas_interaccion: { type: "string", search: true },
       notas: { type: "string", search: true },
       pais: { type: "string", search: true },
       interacciones: { type: "json" },
       observaciones: { type: "string", search: true },
     },
     options_map: { value: "id", label: "name" },
+    hooks: {
+      before_create: (_ctx, row) => apply_interaccion_to_row(row),
+      before_update: (_ctx, _id, patch, existing) =>
+        apply_interaccion_to_row(patch, existing.interacciones),
+    },
   }),
   tables: asociaciones_tables,
   pages: asociaciones_pages,
@@ -90,9 +99,18 @@ export const asociaciones_module = define_module({
       icon: "document",
     },
     {
+      id: "control-emergencias.inventario-general",
+      label: "Inventario general",
+      order: 5,
+      pageId: "control-emergencias.inventario-general",
+      path: "inventario-general",
+      permission: "subject.control-emergencias.inventario-general.read",
+      icon: "document",
+    },
+    {
       id: "control-emergencias.despensa-solidaria",
       label: "Despensa solidaria",
-      order: 5,
+      order: 6,
       pageId: "control-emergencias.despensa-solidaria",
       path: "despensa-solidaria",
       permission: "subject.control-emergencias.despensa-solidaria.read",
@@ -101,16 +119,25 @@ export const asociaciones_module = define_module({
     {
       id: "control-emergencias.asociaciones",
       label: "Gestión de asociaciones",
-      order: 6,
+      order: 7,
       pageId: "control-emergencias.asociaciones",
       path: "asociaciones",
       permission: "subject.control-emergencias.asociaciones.read",
       icon: "document",
     },
     {
+      id: "control-emergencias.libro-cuentas",
+      label: "Libro de cuentas",
+      order: 8,
+      pageId: "control-emergencias.libro-cuentas",
+      path: "libro-cuentas",
+      permission: "subject.control-emergencias.libro-cuentas.read",
+      icon: "document",
+    },
+    {
       id: "control-emergencias.registro-emergencias",
       label: "Registro de emergencias",
-      order: 7,
+      order: 9,
       pageId: "control-emergencias.registro-emergencias",
       path: "registro-emergencias",
       permission: "subject.control-emergencias.registro-emergencias.read",

@@ -1,8 +1,8 @@
 import type { KirletTableDecl } from "@opus-perpetuus/imperium-core-kit";
 
-export const inventario_sanitario_tables: KirletTableDecl[] = [
+export const inventario_general_tables: KirletTableDecl[] = [
   {
-    name: "inventario_sanitario",
+    name: "inventario_general",
     columns: [
       { name: "id", type: "text", primaryKey: true },
       { name: "name", type: "text", notNull: true },
@@ -16,21 +16,13 @@ export const inventario_sanitario_tables: KirletTableDecl[] = [
       { name: "payload", type: "json" },
       { name: "created_at", type: "text", notNull: true },
       { name: "updated_at", type: "text", notNull: true },
-      { name: "categoria", type: "text" },
       { name: "cantidad", type: "real" },
-      { name: "entradas", type: "real" },
-      { name: "salidas", type: "real" },
-      { name: "fecha_salida", type: "text" },
-      { name: "stock_minimo", type: "real" },
-      { name: "fecha_caducidad", type: "text" },
-      { name: "estado", type: "text" },
-      { name: "lote", type: "text" },
       { name: "ubicacion", type: "text" },
-      { name: "observaciones", type: "text" },
+      { name: "retiradas", type: "real" },
     ],
     indexes: [
-      { name: "idx_inventario_sanitario_name", columns: ["name"] },
-      { name: "idx_inventario_sanitario_active", columns: ["is_active"] },
+      { name: "idx_inventario_general_name", columns: ["name"] },
+      { name: "idx_inventario_general_active", columns: ["is_active"] },
     ],
   },
 ];

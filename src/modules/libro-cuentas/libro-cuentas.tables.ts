@@ -1,8 +1,8 @@
 import type { KirletTableDecl } from "@opus-perpetuus/imperium-core-kit";
 
-export const asociaciones_tables: KirletTableDecl[] = [
+export const libro_cuentas_tables: KirletTableDecl[] = [
   {
-    name: "asociaciones",
+    name: "libro_cuentas",
     columns: [
       { name: "id", type: "text", primaryKey: true },
       { name: "name", type: "text", notNull: true },
@@ -16,23 +16,16 @@ export const asociaciones_tables: KirletTableDecl[] = [
       { name: "payload", type: "json" },
       { name: "created_at", type: "text", notNull: true },
       { name: "updated_at", type: "text", notNull: true },
-      { name: "telefono", type: "text" },
-      { name: "correo", type: "text" },
-      { name: "ciudad", type: "text" },
-      { name: "localidad", type: "text" },
-      { name: "tipo", type: "text" },
       { name: "fecha", type: "text" },
-      { name: "fecha_interaccion", type: "text" },
-      { name: "tipo_interaccion", type: "text" },
-      { name: "notas_interaccion", type: "text" },
-      { name: "notas", type: "text" },
-      { name: "pais", type: "text" },
-      { name: "interacciones", type: "json" },
-      { name: "observaciones", type: "text" },
+      { name: "tipo", type: "text" },
+      { name: "motivo", type: "text" },
+      { name: "importe", type: "real" },
+      { name: "saldo", type: "real" },
     ],
     indexes: [
-      { name: "idx_asociaciones_name", columns: ["name"] },
-      { name: "idx_asociaciones_active", columns: ["is_active"] },
+      { name: "idx_libro_cuentas_name", columns: ["name"] },
+      { name: "idx_libro_cuentas_active", columns: ["is_active"] },
+      { name: "idx_libro_cuentas_fecha", columns: ["fecha"] },
     ],
   },
 ];

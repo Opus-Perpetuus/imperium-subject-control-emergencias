@@ -1,6 +1,10 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { servicios_realizados_pages } from "./servicios-realizados.pages.ts";
 import { servicios_realizados_tables } from "./servicios-realizados.tables.ts";
+import {
+  is_blank_service_number,
+  next_service_folio,
+} from "./servicios-realizados-folio.utils.ts";
 
 export const servicios_realizados_module = define_module({
   resource: "servicios-realizados",
@@ -19,7 +23,7 @@ export const servicios_realizados_module = define_module({
     default_sort: "name:asc",
     id_prefix: "servicio",
     fields: {
-      name: { type: "string", required: true, search: true },
+      name: { type: "string", search: true },
       description: { type: "string", search: true },
       is_active: { type: "boolean" },
       state: { type: "string" },
@@ -40,6 +44,15 @@ export const servicios_realizados_module = define_module({
       incidencias: { type: "string", search: true },
     },
     options_map: { value: "id", label: "name" },
+    hooks: {
+      before_create: async (ctx, row) => {
+        if (is_blank_service_number(row.name)) {
+          const n = await ctx.data.count("servicios_realizados");
+          row.name = next_service_folio(n);
+        }
+        return row;
+      },
+    },
   }),
   tables: servicios_realizados_tables,
   pages: servicios_realizados_pages,

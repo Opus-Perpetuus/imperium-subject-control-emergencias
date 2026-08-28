@@ -6,8 +6,10 @@ import { registro_emergencias_module } from "./modules/registro-emergencias/regi
 import { servicios_realizados_module } from "./modules/servicios-realizados/servicios-realizados.routes.ts";
 import { directorio_contactos_module } from "./modules/directorio-contactos/directorio-contactos.routes.ts";
 import { inventario_sanitario_module } from "./modules/inventario-sanitario/inventario-sanitario.routes.ts";
+import { inventario_general_module } from "./modules/inventario-general/inventario-general.routes.ts";
 import { voluntariado_module } from "./modules/voluntariado/voluntariado.routes.ts";
 import { despensa_solidaria_module } from "./modules/despensa-solidaria/despensa-solidaria.routes.ts";
+import { libro_cuentas_module } from "./modules/libro-cuentas/libro-cuentas.routes.ts";
 import { seed_demo } from "./seed.ts";
 
 export const SUBJECT = define_subject({
@@ -16,13 +18,13 @@ export const SUBJECT = define_subject({
   version: pkg.version,
   image: `ghcr.io/opus-perpetuus/subject-control-emergencias:${pkg.version}`,
   compat: { nox: ">=0.5.0", kit: "^0.5.0" },
-  schema_version: 1,
+  schema_version: 2,
   menu_root: {
     id: "control-emergencias.root",
     label: "Control de emergencias",
     order: 0,
   },
-  modules: [asociaciones_module, rescate_animal_module, registro_emergencias_module, servicios_realizados_module, directorio_contactos_module, inventario_sanitario_module, voluntariado_module, despensa_solidaria_module],
+  modules: [asociaciones_module, rescate_animal_module, registro_emergencias_module, servicios_realizados_module, directorio_contactos_module, inventario_sanitario_module, inventario_general_module, voluntariado_module, despensa_solidaria_module, libro_cuentas_module],
   seed: seed_demo,
 });
 

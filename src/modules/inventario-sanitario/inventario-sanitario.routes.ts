@@ -1,6 +1,7 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { inventario_sanitario_pages } from "./inventario-sanitario.pages.ts";
 import { inventario_sanitario_tables } from "./inventario-sanitario.tables.ts";
+import { prepare_item_payload } from "./inventario-sanitario-movimiento.utils.ts";
 
 export const inventario_sanitario_module = define_module({
   resource: "inventario-sanitario",
@@ -30,6 +31,9 @@ export const inventario_sanitario_module = define_module({
       payload: { type: "json" },
       categoria: { type: "string", search: true },
       cantidad: { type: "number" },
+      entradas: { type: "number" },
+      salidas: { type: "number" },
+      fecha_salida: { type: "string", search: true },
       stock_minimo: { type: "number" },
       fecha_caducidad: { type: "string", search: true },
       estado: { type: "string", search: true },
@@ -38,6 +42,19 @@ export const inventario_sanitario_module = define_module({
       observaciones: { type: "string", search: true },
     },
     options_map: { value: "id", label: "name" },
+    hooks: {
+      before_create: (_ctx, row) => prepare_item_payload(row),
+      before_update: (_ctx, _id, patch, existing) =>
+        prepare_item_payload(patch, {
+          cantidad: Number(existing.cantidad ?? 0),
+          entradas: Number(existing.entradas ?? 0),
+          salidas: Number(existing.salidas ?? 0),
+          fecha_salida:
+            existing.fecha_salida == null
+              ? null
+              : String(existing.fecha_salida),
+        }),
+    },
   }),
   tables: inventario_sanitario_tables,
   pages: inventario_sanitario_pages,
