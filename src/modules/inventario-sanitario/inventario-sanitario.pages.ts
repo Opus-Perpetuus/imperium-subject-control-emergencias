@@ -2,16 +2,35 @@ import {
   build_feature_shell_page,
   type KirletPageDecl,
 } from "@opus-perpetuus/imperium-core-kit";
+import {
+  categoria_options,
+  type CategoriaCatalogoRow,
+} from "../../lib/categoria-catalogo.utils.ts";
 
 const API = "api://m/subject-control-emergencias";
+
+/** Semillas del catálogo; solo se usan si la tabla está vacía. */
+const CATEGORIAS_SEMILLA = [
+  { value: "medicamentos", label: "Medicamentos" },
+  { value: "via_aerea", label: "Vía aérea" },
+  { value: "curas_vendajes", label: "Curas y vendajes" },
+  { value: "control_hemorragias", label: "Control de hemorragias" },
+  { value: "epi_seguridad", label: "EPI y seguridad" },
+  { value: "instrumental", label: "Instrumental" },
+];
 
 export const inventario_sanitario_pages: KirletPageDecl[] = [
   {
     id: "control-emergencias.inventario-sanitario",
     path: "inventario-sanitario",
     permission: "subject.control-emergencias.inventario-sanitario.read",
-    build: () =>
-      build_feature_shell_page({
+    build: async ({ data }) => {
+      const catalog = (await data.findMany("categoria_inventario_sanitario", {
+        where: { is_active: true },
+        orderBy: { name: "asc" },
+      })) as CategoriaCatalogoRow[];
+
+      return build_feature_shell_page({
         id: "control-emergencias.inventario-sanitario",
         owner: "subject-control-emergencias",
         title: "Inventario sanitario",
@@ -57,20 +76,26 @@ export const inventario_sanitario_pages: KirletPageDecl[] = [
               { name: "name", component: "input-text", label: "Nombre", required: true },
               { name: "description", component: "input-text", label: "Descripción" },
               { name: "ref", component: "input-text", label: "Referencia (_ref)" },
-              { name: "categoria", component: "input-text", label: "categoria" },
+              {
+                name: "categoria",
+                component: "input-menu",
+                label: "Categoría",
+                required: true,
+                options: categoria_options(catalog, CATEGORIAS_SEMILLA),
+              },
               { name: "cantidad", component: "input-number", label: "cantidad" },
               { name: "entradas", component: "input-number", label: "entradas" },
               { name: "salidas", component: "input-number", label: "salidas" },
               { name: "fecha_salida", component: "input-date", label: "fecha salida" },
               { name: "stock_minimo", component: "input-number", label: "stock minimo" },
-              { name: "fecha_caducidad", component: "input-text", label: "fecha caducidad" },
-              { name: "estado", component: "input-text", label: "estado" },
+              { name: "fecha_caducidad", component: "input-date", label: "Caducidad" },
               { name: "lote", component: "input-text", label: "lote" },
               { name: "ubicacion", component: "input-text", label: "ubicacion" },
-              { name: "observaciones", component: "input-text", label: "observaciones" },
+              { name: "observaciones", component: "input-textarea", label: "observaciones" },
             ],
           },
         },
-      }),
+      });
+    },
   },
 ];

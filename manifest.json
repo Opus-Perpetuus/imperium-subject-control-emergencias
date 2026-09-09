@@ -2,8 +2,8 @@
   "id": "SUBJECT-control-emergencias",
   "technicalId": "subject-control-emergencias",
   "name": "Control de emergencias",
-  "version": "0.1.1",
-  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.1",
+  "version": "0.1.2",
+  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.2",
   "compat": {
     "nox": ">=0.5.0",
     "kit": "^0.5.0"
@@ -71,6 +71,14 @@
       "label": "Editar Inventario sanitario"
     },
     {
+      "id": "subject.control-emergencias.categoria-inventario-sanitario.read",
+      "label": "Ver categorías de inventario sanitario"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-inventario-sanitario.write",
+      "label": "Editar categorías de inventario sanitario"
+    },
+    {
       "id": "subject.control-emergencias.inventario-general.read",
       "label": "Ver Inventario general"
     },
@@ -93,6 +101,14 @@
     {
       "id": "subject.control-emergencias.despensa-solidaria.write",
       "label": "Editar Despensa solidaria"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-despensa-solidaria.read",
+      "label": "Ver categorías de despensa solidaria"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-despensa-solidaria.write",
+      "label": "Editar categorías de despensa solidaria"
     },
     {
       "id": "subject.control-emergencias.libro-cuentas.read",
@@ -125,7 +141,25 @@
           "order": 10,
           "path": "categoria-directorio-contactos",
           "permission": "subject.control-emergencias.categoria-directorio-contactos.read",
-          "icon": "document"
+          "icon": "tag"
+        },
+        {
+          "id": "control-emergencias.categoria-inventario-sanitario",
+          "label": "Categorías de inventario sanitario",
+          "pageId": "control-emergencias.categoria-inventario-sanitario",
+          "order": 11,
+          "path": "categoria-inventario-sanitario",
+          "permission": "subject.control-emergencias.categoria-inventario-sanitario.read",
+          "icon": "tag"
+        },
+        {
+          "id": "control-emergencias.categoria-despensa-solidaria",
+          "label": "Categorías de despensa solidaria",
+          "pageId": "control-emergencias.categoria-despensa-solidaria",
+          "order": 12,
+          "path": "categoria-despensa-solidaria",
+          "permission": "subject.control-emergencias.categoria-despensa-solidaria.read",
+          "icon": "tag"
         },
         {
           "id": "control-emergencias.voluntariado",
@@ -248,6 +282,11 @@
       "permission": "subject.control-emergencias.inventario-sanitario.read"
     },
     {
+      "id": "control-emergencias.categoria-inventario-sanitario",
+      "path": "categoria-inventario-sanitario",
+      "permission": "subject.control-emergencias.categoria-inventario-sanitario.read"
+    },
+    {
       "id": "control-emergencias.inventario-general",
       "path": "inventario-general",
       "permission": "subject.control-emergencias.inventario-general.read"
@@ -261,6 +300,11 @@
       "id": "control-emergencias.despensa-solidaria",
       "path": "despensa-solidaria",
       "permission": "subject.control-emergencias.despensa-solidaria.read"
+    },
+    {
+      "id": "control-emergencias.categoria-despensa-solidaria",
+      "path": "categoria-despensa-solidaria",
+      "permission": "subject.control-emergencias.categoria-despensa-solidaria.read"
     },
     {
       "id": "control-emergencias.libro-cuentas",
@@ -280,9 +324,11 @@
     "directorio-contactos": "directorio-contactos",
     "categoria-directorio-contactos": "categoria-directorio-contactos",
     "inventario-sanitario": "inventario-sanitario",
+    "categoria-inventario-sanitario": "categoria-inventario-sanitario",
     "inventario-general": "inventario-general",
     "voluntariado": "voluntariado",
     "despensa-solidaria": "despensa-solidaria",
+    "categoria-despensa-solidaria": "categoria-despensa-solidaria",
     "libro-cuentas": "libro-cuentas"
   }
 }

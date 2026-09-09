@@ -1,24 +1,24 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { ensure_categoria_ref } from "../../lib/categoria-catalogo.utils.ts";
-import { categoria_directorio_contactos_pages } from "./categoria-directorio-contactos.pages.ts";
-import { categoria_directorio_contactos_tables } from "./categoria-directorio-contactos.tables.ts";
+import { categoria_despensa_solidaria_pages } from "./categoria-despensa-solidaria.pages.ts";
+import { categoria_despensa_solidaria_tables } from "./categoria-despensa-solidaria.tables.ts";
 
-export const categoria_directorio_contactos_module = define_module({
-  resource: "categoria-directorio-contactos",
+export const categoria_despensa_solidaria_module = define_module({
+  resource: "categoria-despensa-solidaria",
   labels: {
-    singular: "Categoría del directorio",
-    plural: "Categorías del directorio",
-    read: "Ver categorías del directorio",
-    write: "Editar categorías del directorio",
+    singular: "Categoría de despensa solidaria",
+    plural: "Categorías de despensa solidaria",
+    read: "Ver categorías de despensa solidaria",
+    write: "Editar categorías de despensa solidaria",
   },
   routes: define_crud({
-    resource: "categoria-directorio-contactos",
-    table: "categoria_directorio_contactos",
+    resource: "categoria-despensa-solidaria",
+    table: "categoria_despensa_solidaria",
     soft_delete: true,
     soft_delete_field: "is_active",
     history: true,
     default_sort: "name:asc",
-    id_prefix: "catdirec",
+    id_prefix: "catdespe",
     fields: {
       name: { type: "string", required: true, search: true },
       description: { type: "string", search: true },
@@ -33,12 +33,12 @@ export const categoria_directorio_contactos_module = define_module({
     options_map: { value: "ref", label: "name" },
     hooks: {
       before_create: async (ctx, row) => {
-        await ensure_categoria_ref(ctx.data, "categoria_directorio_contactos", row);
+        await ensure_categoria_ref(ctx.data, "categoria_despensa_solidaria", row);
         return row;
       },
     },
   }),
-  tables: categoria_directorio_contactos_tables,
-  pages: categoria_directorio_contactos_pages,
+  tables: categoria_despensa_solidaria_tables,
+  pages: categoria_despensa_solidaria_pages,
   menu: [],
 });

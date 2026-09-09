@@ -30,6 +30,8 @@ describe("subject-control-emergencias conformance", () => {
     expect(menu.length).toBeGreaterThan(0);
     const resources = SUBJECT.modules.map((m) => m.resource);
     expect(resources).toContain("categoria-directorio-contactos");
+    expect(resources).toContain("categoria-despensa-solidaria");
+    expect(resources).toContain("categoria-inventario-sanitario");
     const folio = await server.fetch(
       new Request("http://t/rescate-animal", {
         method: "POST",

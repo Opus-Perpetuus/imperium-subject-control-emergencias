@@ -1,24 +1,24 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { ensure_categoria_ref } from "../../lib/categoria-catalogo.utils.ts";
-import { categoria_directorio_contactos_pages } from "./categoria-directorio-contactos.pages.ts";
-import { categoria_directorio_contactos_tables } from "./categoria-directorio-contactos.tables.ts";
+import { categoria_inventario_sanitario_pages } from "./categoria-inventario-sanitario.pages.ts";
+import { categoria_inventario_sanitario_tables } from "./categoria-inventario-sanitario.tables.ts";
 
-export const categoria_directorio_contactos_module = define_module({
-  resource: "categoria-directorio-contactos",
+export const categoria_inventario_sanitario_module = define_module({
+  resource: "categoria-inventario-sanitario",
   labels: {
-    singular: "Categoría del directorio",
-    plural: "Categorías del directorio",
-    read: "Ver categorías del directorio",
-    write: "Editar categorías del directorio",
+    singular: "Categoría de inventario sanitario",
+    plural: "Categorías de inventario sanitario",
+    read: "Ver categorías de inventario sanitario",
+    write: "Editar categorías de inventario sanitario",
   },
   routes: define_crud({
-    resource: "categoria-directorio-contactos",
-    table: "categoria_directorio_contactos",
+    resource: "categoria-inventario-sanitario",
+    table: "categoria_inventario_sanitario",
     soft_delete: true,
     soft_delete_field: "is_active",
     history: true,
     default_sort: "name:asc",
-    id_prefix: "catdirec",
+    id_prefix: "catinven",
     fields: {
       name: { type: "string", required: true, search: true },
       description: { type: "string", search: true },
@@ -33,12 +33,12 @@ export const categoria_directorio_contactos_module = define_module({
     options_map: { value: "ref", label: "name" },
     hooks: {
       before_create: async (ctx, row) => {
-        await ensure_categoria_ref(ctx.data, "categoria_directorio_contactos", row);
+        await ensure_categoria_ref(ctx.data, "categoria_inventario_sanitario", row);
         return row;
       },
     },
   }),
-  tables: categoria_directorio_contactos_tables,
-  pages: categoria_directorio_contactos_pages,
+  tables: categoria_inventario_sanitario_tables,
+  pages: categoria_inventario_sanitario_pages,
   menu: [],
 });
