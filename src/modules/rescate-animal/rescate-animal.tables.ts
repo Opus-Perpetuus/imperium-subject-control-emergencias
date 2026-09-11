@@ -26,8 +26,11 @@ export const rescate_animal_tables: KirletTableDecl[] = [
       { name: "edad_aproximada", type: "text" },
       { name: "color", type: "text" },
       { name: "peso_aproximado", type: "real" },
+      { name: "sexo", type: "text" },
+      { name: "tamano", type: "text" },
       { name: "fotografia", type: "text" },
       { name: "estado_animal", type: "text" },
+      { name: "derivado_a", type: "text" },
       { name: "material_utilizado", type: "text" },
     ],
     indexes: [

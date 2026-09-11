@@ -42,6 +42,26 @@ describe("subject-control-emergencias conformance", () => {
     expect(folio.status).toBe(201);
     const created = (await folio.json()) as { data?: { name?: string } };
     expect(created.data?.name).toMatch(/^INT-\d{6}$/);
+    const aviso = await server.fetch(
+      new Request("http://t/registro-emergencias", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          relacion_alertante: "centro_serem",
+        }),
+      }),
+    );
+    expect(aviso.status).toBe(201);
+    const aviso_body = (await aviso.json()) as {
+      data?: {
+        name?: string;
+        relacion_alertante?: string;
+        medio_recepcion?: string;
+      };
+    };
+    expect(aviso_body.data?.name).toMatch(/^AVISO-\d{5}$/);
+    expect(aviso_body.data?.relacion_alertante).toBe("centro_serem");
+    expect(aviso_body.data?.medio_recepcion).toBe("telefono");
     server.stop();
   });
 });

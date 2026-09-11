@@ -1,6 +1,9 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
+import { apply_categoria_catalogo } from "../../lib/categoria-catalogo.utils.ts";
 import { directorio_contactos_pages } from "./directorio-contactos.pages.ts";
 import { directorio_contactos_tables } from "./directorio-contactos.tables.ts";
+
+const CATALOGO = "categoria_directorio_contactos";
 
 export const directorio_contactos_module = define_module({
   resource: "directorio-contactos",
@@ -28,7 +31,7 @@ export const directorio_contactos_module = define_module({
       created_by: { type: "string" },
       custom_data: { type: "json" },
       payload: { type: "json" },
-      categoria: { type: "string", search: true },
+      categoria: { type: "string", required: true, search: true },
       telefono: { type: "string", search: true },
       telefono_secundario: { type: "string", search: true },
       direccion: { type: "string", search: true },
@@ -38,6 +41,16 @@ export const directorio_contactos_module = define_module({
       observaciones: { type: "string", search: true },
     },
     options_map: { value: "id", label: "name" },
+    hooks: {
+      before_create: async (ctx, row) => {
+        await apply_categoria_catalogo(ctx.data, CATALOGO, row);
+        return row;
+      },
+      before_update: async (ctx, _id, patch) => {
+        await apply_categoria_catalogo(ctx.data, CATALOGO, patch);
+        return patch;
+      },
+    },
   }),
   tables: directorio_contactos_tables,
   pages: directorio_contactos_pages,

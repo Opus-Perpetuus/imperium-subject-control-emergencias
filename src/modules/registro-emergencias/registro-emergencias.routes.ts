@@ -1,4 +1,9 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
+import { apply_registro_catalogos } from "./registro-emergencias-catalogo.utils.ts";
+import {
+  is_blank_aviso_number,
+  next_aviso_folio,
+} from "./registro-emergencias-folio.utils.ts";
 import { registro_emergencias_pages } from "./registro-emergencias.pages.ts";
 import { registro_emergencias_tables } from "./registro-emergencias.tables.ts";
 
@@ -16,10 +21,10 @@ export const registro_emergencias_module = define_module({
     soft_delete: true,
     soft_delete_field: "is_active",
     history: true,
-    default_sort: "name:asc",
+    default_sort: "fecha_hora_recepcion:desc",
     id_prefix: "registro",
     fields: {
-      name: { type: "string", required: true, search: true },
+      name: { type: "string", search: true },
       description: { type: "string", search: true },
       is_active: { type: "boolean" },
       state: { type: "string" },
@@ -34,8 +39,10 @@ export const registro_emergencias_module = define_module({
       municipio: { type: "string", search: true },
       resultado: { type: "string", search: true },
       telefono: { type: "string", search: true },
+      medio_recepcion: { type: "string", search: true },
       operador: { type: "string", search: true },
       duracion_llamada: { type: "number" },
+      relacion_alertante: { type: "string", search: true },
       alertante_nombre: { type: "string", search: true },
       alertante_telefono: { type: "string", search: true },
       direccion_exacta: { type: "string", search: true },
@@ -66,6 +73,17 @@ export const registro_emergencias_module = define_module({
       adjuntos: { type: "json" },
     },
     options_map: { value: "id", label: "name" },
+    hooks: {
+      before_create: async (ctx, row) => {
+        apply_registro_catalogos(row, "create");
+        if (is_blank_aviso_number(row.name)) {
+          const n = await ctx.data.count("registro_emergencias");
+          row.name = next_aviso_folio(n);
+        }
+        return row;
+      },
+      before_update: (_ctx, _id, patch) => apply_registro_catalogos(patch, "update"),
+    },
   }),
   tables: registro_emergencias_tables,
   pages: registro_emergencias_pages,

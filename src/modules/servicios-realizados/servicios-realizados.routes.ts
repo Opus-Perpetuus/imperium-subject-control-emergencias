@@ -1,6 +1,7 @@
 import { define_crud, define_module } from "@opus-perpetuus/imperium-core-kit";
 import { servicios_realizados_pages } from "./servicios-realizados.pages.ts";
 import { servicios_realizados_tables } from "./servicios-realizados.tables.ts";
+import { compute_total_horas } from "./servicios-realizados-horas.utils.ts";
 import {
   is_blank_service_number,
   next_service_folio,
@@ -35,7 +36,7 @@ export const servicios_realizados_module = define_module({
       tipo_servicio: { type: "string", search: true },
       fecha_hora_inicio: { type: "string", search: true },
       fecha_hora_fin: { type: "string", search: true },
-      total_horas: { type: "number" },
+      total_horas: { type: "number", create: false, update: false },
       lugar: { type: "string", search: true },
       vehiculos: { type: "string", search: true },
       voluntarios: { type: "string", search: true },
@@ -50,7 +51,18 @@ export const servicios_realizados_module = define_module({
           const n = await ctx.data.count("servicios_realizados");
           row.name = next_service_folio(n);
         }
+        row.total_horas = compute_total_horas(
+          row.fecha_hora_inicio,
+          row.fecha_hora_fin,
+        );
         return row;
+      },
+      before_update: (_ctx, _id, patch, existing) => {
+        patch.total_horas = compute_total_horas(
+          patch.fecha_hora_inicio ?? existing.fecha_hora_inicio,
+          patch.fecha_hora_fin ?? existing.fecha_hora_fin,
+        );
+        return patch;
       },
     },
   }),

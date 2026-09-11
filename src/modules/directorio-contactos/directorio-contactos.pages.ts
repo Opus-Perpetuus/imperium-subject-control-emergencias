@@ -82,6 +82,7 @@ export const directorio_contactos_pages: KirletPageDecl[] = [
                 name: "categoria",
                 component: "input-menu",
                 label: "Categoría",
+                required: true,
                 options: categoria_options,
               },
               { name: "telefono", component: "input-text", label: "telefono" },

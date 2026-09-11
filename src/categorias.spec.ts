@@ -77,6 +77,17 @@ describe("categorías y estado de despensa / inventario sanitario", () => {
     expect(data.estado).toBe("caducado");
   });
 
+  test("el directorio guarda la categoría por clave aunque manden el nombre", async () => {
+    const res = await post("/directorio-contactos", {
+      name: "Centro coordinador",
+      categoria: "Comunidad autónoma",
+      telefono: "112",
+    });
+    expect(res.status).toBe(201);
+    const { data } = (await res.json()) as { data: Record<string, unknown> };
+    expect(data.categoria).toBe("comunidad_autonoma");
+  });
+
   test("una categoría nueva sin clave la deriva del nombre", async () => {
     const res = await post("/categoria-despensa-solidaria", { name: "Mascotas" });
     expect(res.status).toBe(201);
