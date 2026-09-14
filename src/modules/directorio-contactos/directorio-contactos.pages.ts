@@ -126,9 +126,23 @@ export const directorio_contactos_pages: KirletPageDecl[] = [
       const texto = (valor: unknown): string =>
         valor == null ? "" : String(valor).trim();
 
+      // La ficha guarda el identificador de la categoria, no su nombre: sin
+      // resolverlo el visitante leeria "servicios_municipales" como titulo.
+      const categorias = (await data.findMany("categoria_directorio_contactos", {
+        where: { is_active: true },
+      })) as Array<{ ref?: unknown; name?: unknown }>;
+      const nombre_categoria = new Map<string, string>();
+      for (const cat of categorias) {
+        const ref = texto(cat.ref);
+        if (ref) nombre_categoria.set(ref, texto(cat.name) || ref);
+      }
+      const legible = (ref: string): string =>
+        nombre_categoria.get(ref) ??
+        ref.replace(/[_-]+/g, " ").replace(/^./, (l) => l.toUpperCase());
+
       const por_categoria = new Map<string, Array<Record<string, unknown>>>();
       for (const c of contactos) {
-        const clave = texto(c.categoria) || "Otros";
+        const clave = legible(texto(c.categoria) || "otros");
         const grupo = por_categoria.get(clave) ?? [];
         grupo.push(c);
         por_categoria.set(clave, grupo);

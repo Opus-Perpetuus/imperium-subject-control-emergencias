@@ -142,3 +142,60 @@ describe("directorio de emergencias público", () => {
     server.stop();
   });
 });
+
+describe("nombres de categoría legibles", () => {
+  test("se enseña el nombre de la categoría, no su identificador", async () => {
+    // La ficha guarda el ref; sin resolverlo el vecino leía
+    // "servicios_municipales" como título de sección.
+    const server = create_subject_test_context(SUBJECT);
+    await server.data.insert("categoria_directorio_contactos", {
+      id: "cat-sm",
+      ref: "servicios_municipales",
+      name: "Servicios municipales",
+      is_active: true,
+    });
+    await server.data.insert("directorio_contactos", {
+      id: "c9",
+      name: "Agua Potable",
+      categoria: "servicios_municipales",
+      telefono: "555",
+      is_active: true,
+    });
+    const decl = directorio_contactos_pages.find(
+      (p) => p.id === "control-emergencias.directorio-publico",
+    )!;
+    const built = await decl.build({
+      url: new URL("http://t/directorio-publico"),
+      identity: null,
+      data: server.data,
+      nox: server.nox,
+      files: server.files,
+    });
+    const json = JSON.stringify(built);
+    expect(json).toContain("Servicios municipales");
+    expect(json).not.toContain("## servicios_municipales");
+    server.stop();
+  });
+
+  test("una categoría sin catálogo se lee igual", async () => {
+    const server = create_subject_test_context(SUBJECT);
+    await server.data.insert("directorio_contactos", {
+      id: "c10",
+      name: "Otra cosa",
+      categoria: "proteccion_civil",
+      is_active: true,
+    });
+    const decl = directorio_contactos_pages.find(
+      (p) => p.id === "control-emergencias.directorio-publico",
+    )!;
+    const built = await decl.build({
+      url: new URL("http://t/directorio-publico"),
+      identity: null,
+      data: server.data,
+      nox: server.nox,
+      files: server.files,
+    });
+    expect(JSON.stringify(built)).toContain("Proteccion civil");
+    server.stop();
+  });
+});
