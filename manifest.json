@@ -2,8 +2,8 @@
   "id": "SUBJECT-control-emergencias",
   "technicalId": "subject-control-emergencias",
   "name": "Control de emergencias",
-  "version": "0.1.3",
-  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.3",
+  "version": "0.1.4",
+  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.4",
   "compat": {
     "nox": ">=0.5.0",
     "kit": "^0.5.0"
@@ -117,6 +117,22 @@
     {
       "id": "subject.control-emergencias.libro-cuentas.write",
       "label": "Editar Libro de cuentas"
+    },
+    {
+      "id": "subject.control-emergencias.base-volcanica.read",
+      "label": "Ver base volcánica"
+    },
+    {
+      "id": "subject.control-emergencias.base-volcanica.write",
+      "label": "Editar base volcánica"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-base-volcanica.read",
+      "label": "Ver categorías de base volcánica"
+    },
+    {
+      "id": "subject.control-emergencias.categoria-base-volcanica.write",
+      "label": "Editar categorías de base volcánica"
     }
   ],
   "menu": [
@@ -272,6 +288,11 @@
       "permission": "subject.control-emergencias.directorio-contactos.read"
     },
     {
+      "id": "control-emergencias.directorio-publico",
+      "path": "directorio-publico",
+      "permission": "subject.control-emergencias.directorio-contactos.read"
+    },
+    {
       "id": "control-emergencias.categoria-directorio-contactos",
       "path": "categoria-directorio-contactos",
       "permission": "subject.control-emergencias.categoria-directorio-contactos.read"
@@ -310,11 +331,31 @@
       "id": "control-emergencias.libro-cuentas",
       "path": "libro-cuentas",
       "permission": "subject.control-emergencias.libro-cuentas.read"
+    },
+    {
+      "id": "control-emergencias.base-volcanica",
+      "path": "base-volcanica",
+      "permission": "subject.control-emergencias.base-volcanica.read"
+    },
+    {
+      "id": "control-emergencias.categoria-base-volcanica",
+      "path": "categoria-base-volcanica",
+      "permission": "subject.control-emergencias.categoria-base-volcanica.read"
     }
   ],
   "storage": {
     "domain": "shared-nox-postgres",
     "files": false
+  },
+  "public": {
+    "pages": [
+      {
+        "id": "control-emergencias.directorio-publico",
+        "access": "anonymous",
+        "segment": "directorio",
+        "label": "Directorio de emergencias"
+      }
+    ]
   },
   "resources": {
     "asociaciones": "asociaciones",
@@ -329,6 +370,8 @@
     "voluntariado": "voluntariado",
     "despensa-solidaria": "despensa-solidaria",
     "categoria-despensa-solidaria": "categoria-despensa-solidaria",
-    "libro-cuentas": "libro-cuentas"
+    "libro-cuentas": "libro-cuentas",
+    "base-volcanica": "base-volcanica",
+    "categoria-base-volcanica": "categoria-base-volcanica"
   }
 }

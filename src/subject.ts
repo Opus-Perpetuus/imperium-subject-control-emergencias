@@ -24,6 +24,7 @@ export const SUBJECT = define_subject({
   image: `ghcr.io/opus-perpetuus/subject-control-emergencias:${pkg.version}`,
   compat: { nox: ">=0.5.0", kit: "^0.5.0" },
   schema_version: 4,
+  public: true,
   menu_root: {
     id: "control-emergencias.root",
     label: "Control de emergencias",
