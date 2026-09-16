@@ -2,8 +2,8 @@
   "id": "SUBJECT-control-emergencias",
   "technicalId": "subject-control-emergencias",
   "name": "Control de emergencias",
-  "version": "0.1.5",
-  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.5",
+  "version": "0.1.6",
+  "image": "ghcr.io/opus-perpetuus/subject-control-emergencias:0.1.6",
   "compat": {
     "nox": ">=0.5.0",
     "kit": "^0.5.0"
