@@ -76,7 +76,7 @@ export const directorio_contactos_pages: KirletPageDecl[] = [
           form: {
             fields: [
               { name: "name", component: "input-text", label: "Nombre", required: true },
-              { name: "description", component: "input-text", label: "Descripción" },
+              { name: "description", component: "input-textarea", label: "Descripción" },
               { name: "ref", component: "input-text", label: "Referencia (_ref)" },
               {
                 name: "categoria",
@@ -85,12 +85,12 @@ export const directorio_contactos_pages: KirletPageDecl[] = [
                 required: true,
                 options: categoria_options,
               },
-              { name: "telefono", component: "input-text", label: "telefono" },
-              { name: "telefono_secundario", component: "input-text", label: "telefono secundario" },
+              { name: "telefono", component: "input-text", label: "telefono", type: "tel" },
+              { name: "telefono_secundario", component: "input-text", label: "telefono secundario", type: "tel" },
               { name: "direccion", component: "input-text", label: "direccion" },
-              { name: "web", component: "input-text", label: "web" },
-              { name: "email", component: "input-text", label: "email" },
-              { name: "observaciones", component: "input-text", label: "observaciones" },
+              { name: "web", component: "input-text", label: "web", type: "url" },
+              { name: "email", component: "input-text", label: "email", type: "email" },
+              { name: "observaciones", component: "input-textarea", label: "observaciones" },
             ],
           },
         },

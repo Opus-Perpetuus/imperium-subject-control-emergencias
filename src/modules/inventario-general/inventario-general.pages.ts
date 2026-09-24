@@ -56,7 +56,7 @@ export const inventario_general_pages: KirletPageDecl[] = [
                 label: "Retiradas",
                 min: 0,
               },
-              { name: "description", component: "input-text", label: "Descripción" },
+              { name: "description", component: "input-textarea", label: "Descripción" },
               { name: "ref", component: "input-text", label: "Referencia (_ref)" },
             ],
           },

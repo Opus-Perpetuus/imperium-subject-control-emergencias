@@ -47,7 +47,7 @@ export const categoria_base_volcanica_pages: KirletPageDecl[] = [
             fields: [
               { name: "name", component: "input-text", label: "Nombre", required: true },
               { name: "ref", component: "input-text", label: "Clave (_ref)" },
-              { name: "description", component: "input-text", label: "Descripción" },
+              { name: "description", component: "input-textarea", label: "Descripción" },
             ],
           },
         },
