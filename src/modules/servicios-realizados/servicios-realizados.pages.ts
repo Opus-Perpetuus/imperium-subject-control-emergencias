@@ -2,6 +2,7 @@ import {
   build_feature_shell_page,
   type KirletPageDecl,
 } from "@opus-perpetuus/imperium-core-kit";
+import { general_option_list_options_source } from "../../general-option-seeds.ts";
 
 const API = "api://m/subject-control-emergencias";
 
@@ -63,15 +64,11 @@ export const servicios_realizados_pages: KirletPageDecl[] = [
                 name: "tipo_servicio",
                 component: "input-menu",
                 label: "tipo servicio",
-                options: [
-                  { value: "preventivo", label: "Preventivo" },
-                  { value: "teleservicio", label: "Teleservicio" },
-                  { value: "social", label: "Social" },
-                  { value: "reunion_formacion", label: "Reunión / Formación" },
-                  { value: "catastrofe", label: "Catástrofe" },
-                  { value: "guardia", label: "Guardia" },
-                  { value: "otro", label: "Otro" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/servicios-realizados",
+                  "tipo_servicio",
+                ),
               },
               { name: "fecha_hora_inicio", component: "input-datetime", label: "fecha hora inicio" },
               { name: "fecha_hora_fin", component: "input-datetime", label: "fecha hora fin" },

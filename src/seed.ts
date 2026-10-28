@@ -1,5 +1,7 @@
 import type { KirletDataClient, NoxServices } from "@opus-perpetuus/imperium-core-kit";
 import { new_id, now_iso } from "@opus-perpetuus/imperium-core-kit";
+import { push_general_option_seeds } from "./general-option-seeds.ts";
+import { push_status_seeds } from "./status-seeds.ts";
 
 type SeedCtx = {
   data: KirletDataClient;
@@ -58,6 +60,14 @@ const CATALOGOS: Array<{
 ];
 
 export async function seed_demo(ctx: SeedCtx): Promise<void> {
+  // Estatus y listas generales en el núcleo (solo agrega faltantes).
+  void push_status_seeds().then((r) =>
+    console.log(JSON.stringify({ scope: "seed", msg: "status_seeds", ...r, data: undefined })),
+  );
+  void push_general_option_seeds().then((r) =>
+    console.log(JSON.stringify({ scope: "seed", msg: "general_option_seeds", ...r, data: undefined })),
+  );
+
   const ts = now_iso();
   for (const catalogo of CATALOGOS) {
     if ((await ctx.data.count(catalogo.table)) > 0) continue;

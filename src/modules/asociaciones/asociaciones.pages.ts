@@ -2,6 +2,7 @@ import {
   build_feature_shell_page,
   type KirletPageDecl,
 } from "@opus-perpetuus/imperium-core-kit";
+import { general_option_list_options_source } from "../../general-option-seeds.ts";
 
 const API = "api://m/subject-control-emergencias";
 
@@ -69,13 +70,11 @@ export const asociaciones_pages: KirletPageDecl[] = [
                 name: "tipo_interaccion",
                 component: "input-menu",
                 label: "Tipo de interacción",
-                options: [
-                  { value: "llamada", label: "Llamada" },
-                  { value: "correo", label: "Correo" },
-                  { value: "carta", label: "Carta" },
-                  { value: "persona", label: "En persona" },
-                  { value: "registro", label: "Registro" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/asociaciones",
+                  "tipo_interaccion",
+                ),
               },
               {
                 name: "notas_interaccion",

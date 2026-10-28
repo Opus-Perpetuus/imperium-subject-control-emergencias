@@ -9,6 +9,7 @@ import {
   RESULTADO,
   TIPO_EMERGENCIA,
 } from "./registro-emergencias-catalogo.utils.ts";
+import { general_option_list_options_source } from "../../general-option-seeds.ts";
 
 const API = "api://m/subject-control-emergencias";
 
@@ -110,16 +111,11 @@ export const registro_emergencias_pages: KirletPageDecl[] = [
                 name: "riesgos_anadidos",
                 component: "input-checkbox-group",
                 label: "Riesgos añadidos",
-                options: [
-                  { value: "fuego", label: "Fuego" },
-                  { value: "gas", label: "Gas" },
-                  { value: "electricidad", label: "Electricidad" },
-                  { value: "derrumbes", label: "Derrumbes" },
-                  { value: "violencia", label: "Violencia" },
-                  { value: "sustancias_peligrosas", label: "Sustancias peligrosas" },
-                  { value: "desprendimientos", label: "Desprendimientos" },
-                  { value: "animales_peligrosos", label: "Animales peligrosos" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/registro-emergencias",
+                  "riesgos_anadidos",
+                ),
               },
               { name: "hora_movilizacion", component: "input-datetime", label: "Hora de movilización" },
               { name: "hora_llegada", component: "input-datetime", label: "Hora de llegada" },
@@ -135,17 +131,11 @@ export const registro_emergencias_pages: KirletPageDecl[] = [
                 name: "recursos_externos",
                 component: "input-checkbox-group",
                 label: "Recursos externos",
-                options: [
-                  { value: "uvi_movil", label: "UVI Móvil" },
-                  { value: "svb", label: "SVB" },
-                  { value: "bomberos", label: "Bomberos" },
-                  { value: "policia_guardia_civil", label: "Policía o Guardia Civil" },
-                  { value: "servicios_sociales", label: "Servicios sociales" },
-                  { value: "unidades_caninas", label: "Unidades caninas de rescate" },
-                  { value: "ume", label: "UME" },
-                  { value: "psicologos", label: "Psicólogos" },
-                  { value: "servicios_funerarios", label: "Servicios funerarios" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/registro-emergencias",
+                  "recursos_externos",
+                ),
               },
               {
                 name: "instrucciones_alertante",

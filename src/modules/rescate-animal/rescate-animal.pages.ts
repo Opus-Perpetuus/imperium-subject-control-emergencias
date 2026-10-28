@@ -2,6 +2,7 @@ import {
   build_feature_shell_page,
   type KirletPageDecl,
 } from "@opus-perpetuus/imperium-core-kit";
+import { general_option_list_options_source } from "../../general-option-seeds.ts";
 
 const API = "api://m/subject-control-emergencias";
 
@@ -66,49 +67,41 @@ export const rescate_animal_pages: KirletPageDecl[] = [
                 name: "sexo",
                 component: "input-menu",
                 label: "Sexo",
-                options: [
-                  { value: "macho", label: "Macho" },
-                  { value: "hembra", label: "Hembra" },
-                  { value: "no_sabe", label: "No sabe" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/rescate-animal",
+                  "sexo",
+                ),
               },
               { name: "edad_aproximada", component: "input-text", label: "Edad aproximada" },
               {
                 name: "tamano",
                 component: "input-menu",
                 label: "Tamaño",
-                options: [
-                  { value: "grande", label: "Grande" },
-                  { value: "mediano", label: "Mediano" },
-                  { value: "pequeno", label: "Pequeño" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/rescate-animal",
+                  "tamano",
+                ),
               },
               { name: "color", component: "input-text", label: "Color" },
               { name: "peso_aproximado", component: "input-number", label: "Peso aproximado (kg)", min: 0 },
               { name: "lugar_encontrado", component: "input-text", label: "Lugar encontrado" },
               {
                 name: "estado",
-                component: "input-menu",
+                component: "input-status",
                 label: "Estado",
-                options: [
-                  { value: "rescatado", label: "Rescatado" },
-                  { value: "desaparecido", label: "Desaparecido" },
-                  { value: "en_acogida", label: "En acogida" },
-                  { value: "adoptado", label: "Adoptado" },
-                  { value: "fallecido", label: "Fallecido" },
-                ],
+                // Opciones: status-option-control (seed en status-seeds.ts).
               },
               {
                 name: "derivado_a",
                 component: "input-menu",
                 label: "Derivado a",
-                options: [
-                  { value: "clinica_veterinaria", label: "Clínica veterinaria" },
-                  { value: "centro_proteccion", label: "Centro de protección animal" },
-                  { value: "apa", label: "APA" },
-                  { value: "policia_local", label: "Policía local" },
-                  { value: "agentes_forestales", label: "Agentes forestales" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/rescate-animal",
+                  "derivado_a",
+                ),
               },
               { name: "estado_animal", component: "input-textarea", label: "Condición del animal" },
               { name: "material_utilizado", component: "input-textarea", label: "Material utilizado" },

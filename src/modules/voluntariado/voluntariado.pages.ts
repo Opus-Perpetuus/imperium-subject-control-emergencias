@@ -2,6 +2,7 @@ import {
   build_feature_shell_page,
   type KirletPageDecl,
 } from "@opus-perpetuus/imperium-core-kit";
+import { general_option_list_options_source } from "../../general-option-seeds.ts";
 
 const API = "api://m/subject-control-emergencias";
 
@@ -70,23 +71,11 @@ export const voluntariado_pages: KirletPageDecl[] = [
                 name: "formacion_interes",
                 component: "input-checkbox-group",
                 label: "formacion interes",
-                options: [
-                  { value: "tes", label: "TES" },
-                  { value: "tts", label: "TTS" },
-                  { value: "primeros_auxilios", label: "Primeros auxilios" },
-                  { value: "atencion_psicologica", label: "Atención psicológica" },
-                  { value: "conduccion_4x4", label: "Conducción 4x4" },
-                  { value: "medicina", label: "Medicina" },
-                  { value: "enfermeria", label: "Enfermería" },
-                  { value: "svb_desa", label: "SVB + DESA" },
-                  { value: "piloto_drones", label: "Piloto de drones" },
-                  { value: "manejo_emisora", label: "Manejo de emisora" },
-                  { value: "tec_proteccion_civil", label: "Téc. protección civil" },
-                  { value: "rescate_montana", label: "Rescate en montaña" },
-                  { value: "rescate_acuatico", label: "Rescate acuático" },
-                  { value: "patron_embarcaciones", label: "Patrón de embarcaciones" },
-                  { value: "otros", label: "Otros" },
-                ],
+                // Opciones: general-option-list-control (seed en general-option-seeds.ts).
+                optionsSource: general_option_list_options_source(
+                  "subject-control-emergencias/voluntariado",
+                  "formacion_interes",
+                ),
               },
               { name: "otra_formacion", component: "input-textarea", label: "otra formacion" },
               { name: "carnet_conducir", component: "input-text", label: "carnet conducir" },
