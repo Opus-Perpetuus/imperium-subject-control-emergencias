@@ -43,7 +43,8 @@ export const inventario_sanitario_module = define_module({
       // Calculado por caducidad y stock; nunca lo manda el cliente.
       estado: { type: "string", search: true, create: false, update: false },
       lote: { type: "string", search: true },
-      ubicacion: { type: "string", search: true },
+      // Dónde se guarda el insumo (bodega/estante), no un domicilio.
+      ubicacion: { type: "string", search: true, field_values: true },
       observaciones: { type: "string", search: true },
     },
     options_map: { value: "id", label: "name" },

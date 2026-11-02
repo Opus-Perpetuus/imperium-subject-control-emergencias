@@ -30,7 +30,8 @@ export const inventario_general_module = define_module({
       custom_data: { type: "json" },
       payload: { type: "json" },
       cantidad: { type: "number" },
-      ubicacion: { type: "string", required: true, search: true },
+      // Dónde se guarda el material (bodega/estante), no un domicilio.
+      ubicacion: { type: "string", required: true, search: true, field_values: true },
       retiradas: { type: "number" },
     },
     options_map: { value: "id", label: "name" },
